@@ -9,20 +9,20 @@
 
 import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './ContactPage.scss';
-import AppStore from '../../stores/AppStore';
-import AppActions from '../../actions/AppActions';
-import DataContent from './DataContent';
+import s from './InterviewPage.scss';
+import InterviewItem from './InterviewItem';
+import InterviewStore from '../../stores/InterviewStore';
+import InterviewActions from '../../actions/InterviewActions';
 import Loader from 'react-loader';
 
-const title = 'Contact Us';
+const title = 'Inverviews';
 
 
-class ContactPage extends Component {
+class InterviewPage extends Component {
 
     constructor(props) {
         super(props);
-        this.state = AppStore.getState();
+        this.state = InterviewStore.getState();
         // AppActions.getData();
         this.onChange = this.onChange.bind(this);
     }
@@ -33,11 +33,11 @@ class ContactPage extends Component {
 
   componentWillMount() {
     this.context.onSetTitle(title);
-    AppStore.listen(this.onChange);
+    InterviewStore.listen(this.onChange);
 }
 
 componentWillUnmount() {
-    AppStore.unlisten(this.onChange);
+    InterviewStore.unlisten(this.onChange);
 }
 
 onChange(state) {
@@ -47,7 +47,7 @@ onChange(state) {
 renderData() {
     return this.state.data.map((data) => {
         return (
-            <DataContent key={data.id} data={data} />
+            <InterviewItem key={data.id} data={data} />
         )
     })
 }
@@ -57,10 +57,10 @@ renderData() {
       <div className={s.root}>
         <div className={s.container}>
           <h1>{title}</h1>
-          <div>
-              <Loader loaded={this.state.loaded} />
-              { this.renderData() }
-          </div>
+            <div>
+                <Loader loaded={this.state.loaded} />
+                { this.renderData() }
+            </div>
         </div>
       </div>
     );
@@ -68,4 +68,4 @@ renderData() {
 
 }
 
-export default withStyles(ContactPage, s);
+export default withStyles(InterviewPage, s);
