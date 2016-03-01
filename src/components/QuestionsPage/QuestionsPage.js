@@ -15,6 +15,7 @@ import QuestionActions from '../../actions/QuestionActions';
 import Loader from 'react-loader';
 import QuestionItem from './QuestionItem';
 import FloatButton from '../UI/FloatButton';
+import AddQuestionModal from './AddQuestionModal';
 
 const title = 'Questions';
 
@@ -26,6 +27,8 @@ class QuestionsPage extends Component {
         this.state = QuestionStore.getState();
         // AppActions.getData();
         this.onChange = this.onChange.bind(this);
+        this.openModal = this.openModal.bind(this);
+        this.closeMOdal = this.closeModal.bind(this);
     }
 
   static contextTypes = {
@@ -45,6 +48,14 @@ onChange(state) {
     this.setState(state);
 }
 
+openModal() {
+    this.setState({ modalIsOpen: true});
+}
+
+closeModal() {
+    this.setState({ modalIsOpen: false});
+}
+
 renderData() {
     return this.state.data.map((data) => {
         return (
@@ -60,7 +71,10 @@ renderData() {
           <h1>{title}</h1>
             <div>
                 <Loader loaded={this.state.loaded} />
-                <FloatButton />
+                <FloatButton openModal={this.openModal}/>
+                <AddQuestionModal
+                    open={this.state.modalIsOpen}
+                    close={this.closeModal} />
                 { this.renderData() }
             </div>
         </div>

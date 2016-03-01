@@ -16,6 +16,7 @@ class QuestionStore {
         this.bindActions(QuestionActions);
         this.exportAsync(QuestionSource);
         this.loaded = false;
+        this.modalIsOpen = false;
         this.data = [];
         this.error = null
     }

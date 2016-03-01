@@ -5,7 +5,7 @@ import ContentAdd from 'material-ui/lib/svg-icons/content/add';
 class FloatButton extends Component {
 
     handleClick = () => {
-
+        this.props.openModal();
     };
 
     render() {
