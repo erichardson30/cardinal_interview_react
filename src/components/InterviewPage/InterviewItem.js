@@ -17,6 +17,7 @@ import FlatButton from 'material-ui/lib/flat-button';
 import CardText from 'material-ui/lib/card/card-text';
 
 class InterviewItem extends Component {
+
     render() {
         return (
           <Card>
@@ -24,10 +25,6 @@ class InterviewItem extends Component {
             <CardText>
               {this.props.data.text}
             </CardText>
-            <CardActions>
-              <FlatButton label="Tag" />
-              <FlatButton label="Tag" />
-            </CardActions>
           </Card>
         )
     }

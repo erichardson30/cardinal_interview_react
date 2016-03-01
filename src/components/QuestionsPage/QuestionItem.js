@@ -17,6 +17,22 @@ import FlatButton from 'material-ui/lib/flat-button';
 import CardText from 'material-ui/lib/card/card-text';
 
 class QuestionItem extends Component {
+    renderTags() {
+      return this.props.data.tag.map((tag) => {
+          return (
+              <FlatButton label={tag} />
+          )
+      })
+    }
+
+    renderCompany() {
+      return this.props.data.company.map((company) => {
+          return (
+              <FlatButton label={company} />
+          )
+      })
+    }
+
     render() {
         return (
           <Card>
@@ -25,8 +41,8 @@ class QuestionItem extends Component {
               {this.props.data.answer}
             </CardText>
             <CardActions>
-              <FlatButton label="Tag" />
-              <FlatButton label="Tag" />
+              { this.renderTags() }
+              { this.renderCompany() }
             </CardActions>
           </Card>
         )
