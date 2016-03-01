@@ -13,10 +13,12 @@ import fetch from './core/fetch';
 import App from './components/App';
 import ContentPage from './components/ContentPage';
 import ContactPage from './components/ContactPage';
+import InterviewPage from './components/InterviewPage';
 import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
 import NotFoundPage from './components/NotFoundPage';
 import AppStore from './stores/AppStore';
+import InterviewStore from './stores/InterviewStore';
 
 async function getContextComponent(location, callback) {
   const response = await fetch(`/api/content?path=${location.pathname}`);
@@ -29,14 +31,18 @@ const getData = async (location, callback) => {
     await AppStore.fetchData();
     callback(null, () => <ContactPage />)
 }
+
+const getInterviews = async (location, callback) => {
+  await InterviewStore.fetchData();
+  callback(null, () => <InterviewPage />)
+}
 export default (
   <Route>
     <Route path="/" component={App}>
       <IndexRoute getComponent={getContextComponent} />
-      <Route path="contact" getComponent={getData} />
       <Route path="login" component={LoginPage} />
-      <Route path="register" component={RegisterPage} />
-      <Route path="about" getComponent={getContextComponent} />
+      <Route path="interviews" component={InterviewPage} />
+      <Route path="questions" getComponent={getData} />
     </Route>
     <Route path="*" component={NotFoundPage} />
   </Route>
