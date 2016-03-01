@@ -12,13 +12,13 @@ import { IndexRoute, Route } from 'react-router';
 import fetch from './core/fetch';
 import App from './components/App';
 import ContentPage from './components/ContentPage';
-import ContactPage from './components/ContactPage';
 import InterviewPage from './components/InterviewPage';
 import LoginPage from './components/LoginPage';
+import QuestionsPage from './components/QuestionsPage';
 import RegisterPage from './components/RegisterPage';
 import NotFoundPage from './components/NotFoundPage';
-import AppStore from './stores/AppStore';
 import InterviewStore from './stores/InterviewStore';
+import QuestionStore from './stores/QuestionStore';
 
 async function getContextComponent(location, callback) {
   const response = await fetch(`/api/content?path=${location.pathname}`);
@@ -27,22 +27,23 @@ async function getContextComponent(location, callback) {
   callback(null, () => <ContentPage {...content} />);
 }
 
-const getData = async (location, callback) => {
-    await AppStore.fetchData();
-    callback(null, () => <ContactPage />)
-}
-
 const getInterviews = async (location, callback) => {
   await InterviewStore.fetchData();
   callback(null, () => <InterviewPage />)
 }
+
+const getQuestions = async (location, callback) => {
+  await QuestionStore.fetchData();
+  callback(null, () => <QuestionsPage />)
+}
+
 export default (
   <Route>
     <Route path="/" component={App}>
       <IndexRoute getComponent={getContextComponent} />
       <Route path="login" component={LoginPage} />
-      <Route path="interviews" component={InterviewPage} />
-      <Route path="questions" getComponent={getData} />
+      <Route path="interviews" getComponent={getInterviews} />
+      <Route path="questions" getComponent={getQuestions} />
     </Route>
     <Route path="*" component={NotFoundPage} />
   </Route>

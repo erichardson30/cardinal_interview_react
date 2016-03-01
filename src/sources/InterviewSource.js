@@ -1,4 +1,4 @@
-import Api from '../services/Api';
+import Api from '../services/InterviewApi';
 import InterviewActions from '../actions/InterviewActions';
 
 let InterviewSource = {

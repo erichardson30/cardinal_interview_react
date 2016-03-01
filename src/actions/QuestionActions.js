@@ -10,13 +10,12 @@
 import alt from '../core/alt';
 import axios from 'axios';
 
-const url = 'http://jsonplaceholder.typicode.com';
-class AppActions {
+class QuestionActions {
     constructor() {
         // put auto generate actions here
         this.generateActions(
-            'getData'
+            'getQuestions'
         );
     }
 }
-export default (alt.createActions(AppActions));
+export default (alt.createActions(QuestionActions));

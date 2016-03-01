@@ -9,7 +9,10 @@
 
 import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-// import s from './InterviewPage.scss';
+import s from './InterviewPage.scss';
+import InterviewItem from './InterviewItem';
+import InterviewStore from '../../stores/InterviewStore';
+import InterviewActions from '../../actions/InterviewActions';
 import Loader from 'react-loader';
 
 const title = 'Inverviews';
@@ -19,18 +22,45 @@ class InterviewPage extends Component {
 
     constructor(props) {
         super(props);
+        this.state = InterviewStore.getState();
+        // AppActions.getData();
+        this.onChange = this.onChange.bind(this);
     }
 
   static contextTypes = {
     onSetTitle: PropTypes.func.isRequired,
   };
 
+  componentWillMount() {
+    this.context.onSetTitle(title);
+    InterviewStore.listen(this.onChange);
+}
+
+componentWillUnmount() {
+    InterviewStore.unlisten(this.onChange);
+}
+
+onChange(state) {
+    this.setState(state);
+}
+
+renderData() {
+    return this.state.data.map((data) => {
+        return (
+            <InterviewItem key={data.id} data={data} />
+        )
+    })
+}
 
   render() {
     return (
       <div className={s.root}>
         <div className={s.container}>
           <h1>{title}</h1>
+            <div>
+                <Loader loaded={this.state.loaded} />
+                { this.renderData() }
+            </div>
         </div>
       </div>
     );
@@ -38,5 +68,4 @@ class InterviewPage extends Component {
 
 }
 
-// export default withStyles(InterviewPage, s);
-export default InterviewPage;
+export default withStyles(InterviewPage, s);
