@@ -14,6 +14,7 @@ import QuestionStore from '../../stores/QuestionStore';
 import QuestionActions from '../../actions/QuestionActions';
 import Loader from 'react-loader';
 import QuestionItem from './QuestionItem';
+import FloatButton from '../UI/FloatButton';
 
 const title = 'Questions';
 
@@ -59,6 +60,7 @@ renderData() {
           <h1>{title}</h1>
             <div>
                 <Loader loaded={this.state.loaded} />
+                <FloatButton />
                 { this.renderData() }
             </div>
         </div>
