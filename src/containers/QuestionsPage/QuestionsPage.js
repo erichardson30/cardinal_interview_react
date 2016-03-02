@@ -9,22 +9,25 @@
 
 import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './InterviewPage.scss';
-import InterviewItem from './InterviewItem';
-import InterviewStore from '../../stores/InterviewStore';
-import InterviewActions from '../../actions/InterviewActions';
+import s from './QuestionsPage.scss';
+import QuestionStore from '../../stores/QuestionStore';
+import QuestionActions from '../../actions/QuestionActions';
 import Loader from 'react-loader';
+import QuestionItem from '../../components/QuestionsPage/QuestionItem';
+import FloatButton from '../../components/UI/FloatButton';
+import AddQuestionModal from '../../components/QuestionsPage/AddQuestionModal';
 
-const title = 'Inverviews';
+const title = 'Questions';
 
 
-class InterviewPage extends Component {
+class QuestionsPage extends Component {
 
     constructor(props) {
         super(props);
-        this.state = InterviewStore.getState();
-        // AppActions.getData();
+        this.state = QuestionStore.getState();
         this.onChange = this.onChange.bind(this);
+        this.openModal = this.openModal.bind(this);
+        this.closeMOdal = this.closeModal.bind(this);
     }
 
   static contextTypes = {
@@ -33,21 +36,29 @@ class InterviewPage extends Component {
 
   componentWillMount() {
     this.context.onSetTitle(title);
-    InterviewStore.listen(this.onChange);
+    QuestionStore.listen(this.onChange);
 }
 
 componentWillUnmount() {
-    InterviewStore.unlisten(this.onChange);
+    QuestionStore.unlisten(this.onChange);
 }
 
 onChange(state) {
     this.setState(state);
 }
 
+openModal() {
+    this.setState({ modalIsOpen: true});
+}
+
+closeModal() {
+    this.setState({ modalIsOpen: false});
+}
+
 renderData() {
     return this.state.data.map((data) => {
         return (
-            <InterviewItem key={data.id} data={data} />
+            <QuestionItem key={data.id} data={data} />
         )
     })
 }
@@ -59,6 +70,10 @@ renderData() {
           <h1>{title}</h1>
             <div>
                 <Loader loaded={this.state.loaded} />
+                <FloatButton openModal={this.openModal}/>
+                <AddQuestionModal
+                    open={this.state.modalIsOpen}
+                    close={this.closeModal} />
                 { this.renderData() }
             </div>
         </div>
@@ -68,4 +83,4 @@ renderData() {
 
 }
 
-export default withStyles(InterviewPage, s);
+export default withStyles(QuestionsPage, s);

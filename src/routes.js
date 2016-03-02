@@ -10,13 +10,13 @@
 import React from 'react';
 import { IndexRoute, Route } from 'react-router';
 import fetch from './core/fetch';
-import App from './components/App';
-import ContentPage from './components/ContentPage';
-import InterviewPage from './components/InterviewPage';
-import LoginPage from './components/LoginPage';
-import QuestionsPage from './components/QuestionsPage';
-import RegisterPage from './components/RegisterPage';
-import NotFoundPage from './components/NotFoundPage';
+import App from './containers/App';
+import ContentPage from './containers/ContentPage';
+import InterviewPage from './containers/InterviewPage';
+import LoginPage from './containers/LoginPage';
+import QuestionsPage from './containers/QuestionsPage';
+import RegisterPage from './containers/RegisterPage';
+import NotFoundPage from './containers/NotFoundPage';
 import InterviewStore from './stores/InterviewStore';
 import QuestionStore from './stores/QuestionStore';
 

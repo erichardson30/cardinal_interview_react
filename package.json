@@ -85,8 +85,8 @@
   },
   "scripts": {
     "lint": "eslint src tools && jscs src tools",
-    "csslint": "csscomb src/components --lint --verbose",
-    "csscomb": "csscomb src/components --verbose",
+    "csslint": "csscomb src/containers --lint --verbose",
+    "csscomb": "csscomb src/containers --verbose",
     "test": "eslint src && jest",
     "clean": "babel-node tools/run clean",
     "copy": "babel-node tools/run copy",

@@ -10,8 +10,8 @@
 import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './RegisterPage.scss';
-import TextInput from '../UI/TextInput';
-import Button from '../UI/Button';
+import TextInput from '../../components/UI/TextInput';
+import Button from '../../components/UI/Button';
 import SignUpActions from '../../actions/SignUpActions';
 import SignUpStore from '../../stores/SignUpStore';
 
