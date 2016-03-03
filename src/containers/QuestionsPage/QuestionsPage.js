@@ -1,11 +1,11 @@
 /**
- * React Starter (https://github.com/erichardson30/react-starter)
- *
- * Copyright © 2016 Eric Richardson. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
+* React Starter (https://github.com/erichardson30/react-starter)
+*
+* Copyright © 2016 Eric Richardson. All rights reserved.
+*
+* This source code is licensed under the MIT license found in the
+* LICENSE.txt file in the root directory of this source tree.
+*/
 
 import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
@@ -26,60 +26,133 @@ class QuestionsPage extends Component {
         super(props);
         this.state = QuestionStore.getState();
         this.onChange = this.onChange.bind(this);
-        this.openModal = this.openModal.bind(this);
+        this.newQuestion = this.newQuestion.bind(this);
         this.closeMOdal = this.closeModal.bind(this);
     }
 
-  static contextTypes = {
-    onSetTitle: PropTypes.func.isRequired,
-  };
+    static contextTypes = {
+        onSetTitle: PropTypes.func.isRequired,
+    };
 
-  componentWillMount() {
-    this.context.onSetTitle(title);
-    QuestionStore.listen(this.onChange);
-}
+    componentWillMount() {
+        this.context.onSetTitle(title);
+        QuestionStore.listen(this.onChange);
+    }
 
-componentWillUnmount() {
-    QuestionStore.unlisten(this.onChange);
-}
+    componentWillUnmount() {
+        QuestionStore.unlisten(this.onChange);
+    }
 
-onChange(state) {
-    this.setState(state);
-}
+    onChange(state) {
+        this.setState(state);
+    }
 
-openModal() {
-    this.setState({ modalIsOpen: true});
-}
+    shouldComponentUpdate(nextProps, nextState) {
+        if (nextState.data !== this.state.data ||
+            nextState.modalIsOpen !== this.state.modalIsOpen ||
+            nextState.question !== this.state.question) {
+                return true;
+            } else {
+                return false;
+            }
+    }
 
-closeModal() {
-    this.setState({ modalIsOpen: false});
-}
+    newQuestion = () => {
+        this.setState({ modalIsOpen: true});
+        var q = {
+            "text": '',
+            "tag": [],
+            "answer": [],
+            "company": [],
+            "createdAt": ''
+        };
+        this.setState({ question: q })
+    }
 
-renderData() {
-    return this.state.data.map((data) => {
+    closeModal = () => {
+        this.setState({ modalIsOpen: false});
+    }
+
+    createQuestion = () => {
+        const date = new Date();
+        const q = this.state.question;
+        q.createdAt = date.toString();
+        this.setState({ question : q });
+        QuestionStore.createQuestion(this.state.question);
+    }
+
+    textChange = (val) => {
+        const q = this.state.question;
+        q.text = val;
+        this.setState({ question : q });
+    }
+
+    answerChange = (val) => {
+        let array = [];
+        const q = this.state.question;
+        array.push(val);
+        q.answer = array;
+        this.setState({ question : q });
+    }
+
+    tagChange = (val) => {
+        let array = [];
+        const q = this.state.question;
+        array.push(val);
+        q.tag = array;
+        this.setState({ question : q });
+    }
+
+    companyChange = (val) => {
+        let array = [];
+        const q = this.state.question;
+        array.push(val);
+        q.company = array;
+        this.setState({ question : q });
+    }
+
+    editItem = (question) => {
+        this.setState({question: question});
+        this.setState({modalIsOpen: true});
+    }
+
+    deleteItem = (id) => {
+        console.log(id);
+        QuestionStore.deleteQuestion(id);
+    }
+
+    renderData() {
+        return this.state.data.map((data, index) => {
+            return (
+                <QuestionItem key={index} data={data} delete={this.deleteItem} edit={this.editItem} />
+            )
+        })
+    }
+
+    render() {
         return (
-            <QuestionItem key={data.id} data={data} />
-        )
-    })
-}
-
-  render() {
-    return (
-      <div className={s.root}>
-        <div className={s.container}>
-          <h1>{title}</h1>
-            <div>
-                <Loader loaded={this.state.loaded} />
-                <FloatButton openModal={this.openModal}/>
-                <AddQuestionModal
-                    open={this.state.modalIsOpen}
-                    close={this.closeModal} />
-                { this.renderData() }
+            <div className={s.root}>
+                <div className={s.container}>
+                    <h1>{title}</h1>
+                    <div>
+                        <Loader loaded={this.state.loaded} />
+                        <FloatButton openModal={this.newQuestion}/>
+                        <AddQuestionModal
+                            open = {this.state.modalIsOpen}
+                            close = {this.closeModal}
+                            question = {this.state.question}
+                            createQuestion = {this.createQuestion}
+                            changeText = {this.textChange}
+                            changeAnswer = {this.answerChange}
+                            changeTag = {this.tagChange}
+                            changeCompany = {this.companyChange}
+                            />
+                        { this.renderData() }
+                    </div>
+                </div>
             </div>
-        </div>
-      </div>
-    );
-}
+        );
+    }
 
 }
 

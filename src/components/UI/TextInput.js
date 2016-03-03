@@ -12,7 +12,8 @@ class TextInput extends Component {
               <TextField
                 hintText={this.props.hintText}
                 floatingLabelText={this.props.hintText}
-                onChange={this.onChange} />
+                onChange={this.onChange}
+                multiLine={this.props.multiLine} />
                 <br/>
             </div>
         )

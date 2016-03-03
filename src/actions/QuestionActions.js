@@ -14,7 +14,9 @@ class QuestionActions {
     constructor() {
         // put auto generate actions here
         this.generateActions(
-            'getQuestions'
+            'getQuestions',
+            'createQuestion',
+            'deleteQuestion'
         );
     }
 }

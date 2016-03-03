@@ -18,15 +18,41 @@ class QuestionStore {
         this.loaded = false;
         this.modalIsOpen = false;
         this.data = [];
-        this.error = null
+        this.question = {
+            "id": '',
+            "text": '',
+            "tag": [],
+            "answer": [],
+            "company": [],
+            "createdAt": ''
+        };
+        this.error = null;
+        this.questionAdded = null;
+        this.questionDeleted = null;
     }
 
     onGetQuestions(data) {
         if (data === false) {
-            this.onFailed()
+            this.onFailed();
         } else {
             this.data = data;
             this.loaded = true;
+        }
+    }
+
+    onCreateQuestion(response) {
+        if (response === false) {
+            this.onFailed();
+        } else {
+            this.questionAdded = response;
+        }
+    }
+
+    onDeleteQuestion(response) {
+        if (response === false) {
+            this.onFailed();
+        } else {
+            this.questionDeleted = response;
         }
     }
 

@@ -7,11 +7,25 @@ let QuestionSource = {
             async remote(state) {
                 return Api.getQuestions()
             },
-
-            shouldFetch(state) {
-                return (state.data.length == 0);
-            },
             success: QuestionActions.getQuestions
+        }
+    },
+
+    createQuestion(question) {
+        return {
+            async remote(question) {
+                return Api.createQuestion(question)
+            },
+            success: QuestionActions.createQuestion
+        }
+    },
+
+    deleteQuestion(id) {
+        return {
+            async remote(id) {
+                return Api.deleteQuestion(id)
+            },
+            success: QuestionActions.deleteQuestion
         }
     }
 };
