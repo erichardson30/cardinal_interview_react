@@ -9,12 +9,10 @@
 
 import alt from '../core/alt';
 import QuestionActions from '../actions/QuestionActions';
-import QuestionSource from '../sources/QuestionSource';
 
 class QuestionStore {
     constructor() {
         this.bindActions(QuestionActions);
-        this.exportAsync(QuestionSource);
         this.loaded = false;
         this.modalIsOpen = false;
         this.data = [];
@@ -31,7 +29,7 @@ class QuestionStore {
         this.questionDeleted = null;
     }
 
-    onGetQuestions(data) {
+    onGetQuestionsSuccess(data) {
         if (data === false) {
             this.onFailed();
         } else {
@@ -40,19 +38,21 @@ class QuestionStore {
         }
     }
 
-    onCreateQuestion(response) {
-        if (response === false) {
+    onCreateQuestionSuccess(data) {
+        if (data === false) {
             this.onFailed();
         } else {
-            this.questionAdded = response;
+            this.questionAdded = true;
+            //get all questions
         }
     }
 
-    onDeleteQuestion(response) {
-        if (response === false) {
+    onDeleteQuestionSuccess(data) {
+        if (data === false) {
             this.onFailed();
         } else {
-            this.questionDeleted = response;
+            this.questionDeleted = true;
+            //get all questions
         }
     }
 

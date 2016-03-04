@@ -44,7 +44,6 @@ class QuestionItem extends Component {
 
     delete = () => {
         this.props.delete(this.props.data._id);
-        console.log(this.props.data._id);
     }
 
     render() {

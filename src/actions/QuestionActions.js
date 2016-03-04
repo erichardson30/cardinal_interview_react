@@ -9,15 +9,49 @@
 
 import alt from '../core/alt';
 import axios from 'axios';
+import Api from '../services/QuestionApi';
 
 class QuestionActions {
     constructor() {
         // put auto generate actions here
-        this.generateActions(
-            'getQuestions',
-            'createQuestion',
-            'deleteQuestion'
-        );
+        // this.generateActions(
+        //     'getQuestions',
+        //     'createQuestion',
+        //     'deleteQuestion'
+        // );
+    }
+
+    getQuestions() {
+        Api.getQuestions().then((result) => {
+            this.getQuestionsSuccess(result);
+        });
+        return true;
+    }
+
+    getQuestionsSuccess(data) {
+        return data;
+    }
+
+    createQuestion(question,state) {
+        Api.createQuestion(question).then((result) => {
+            this.createQuestionSuccess(result);
+        });
+        return true;
+    }
+
+    createQuestionSuccess(data) {
+        return data;
+    }
+
+    deleteQuestion(id,state) {
+        Api.deleteQuestion(id).then((result) => {
+            this.deleteQuestionSuccess(result);
+        });
+        return true;
+    }
+
+    deleteQuestionSuccess(data) {
+        return data;
     }
 }
 export default (alt.createActions(QuestionActions));

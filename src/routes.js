@@ -19,6 +19,7 @@ import RegisterPage from './containers/RegisterPage';
 import NotFoundPage from './containers/NotFoundPage';
 import InterviewStore from './stores/InterviewStore';
 import QuestionStore from './stores/QuestionStore';
+import QuestionActions from './actions/QuestionActions';
 
 async function getContextComponent(location, callback) {
   const response = await fetch(`/api/content?path=${location.pathname}`);
@@ -33,7 +34,7 @@ const getInterviews = async (location, callback) => {
 }
 
 const getQuestions = async (location, callback) => {
-  await QuestionStore.fetchData();
+  await QuestionActions.getQuestions();
   callback(null, () => <QuestionsPage />)
 }
 

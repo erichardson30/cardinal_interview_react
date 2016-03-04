@@ -47,7 +47,7 @@ onChange(state) {
 renderData() {
     return this.state.data.map((data) => {
         return (
-            <InterviewItem key={data.id} data={data} />
+            <InterviewItem key={data._id} data={data} />
         )
     })
 }

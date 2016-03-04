@@ -6,7 +6,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE.txt file in the root directory of this source tree.
  */
-global.navigator = { navigator: 'all' };
+
 import 'babel-polyfill';
 import path from 'path';
 import express from 'express';
@@ -24,7 +24,7 @@ import { port } from './config';
 import alt from './core/alt';
 import Iso from 'iso';
 
-
+global.navigator = { userAgent: 'all' };
 const server = global.server = express();
 
 //

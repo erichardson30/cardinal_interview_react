@@ -22,9 +22,8 @@ export default {
       return result;
   },
 
-    async createQuestion(state) {
+    async createQuestion(question) {
         let success = null;
-        const question = state.question;
         try {
             const response = await axios.post(interviewAppURL + '/questions', question);
 

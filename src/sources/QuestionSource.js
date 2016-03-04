@@ -20,9 +20,10 @@ let QuestionSource = {
         }
     },
 
-    deleteQuestion(id) {
+    deleteQuestion(state, id) {
+        console.log(id);
         return {
-            async remote(id) {
+            async remote(state, id) {
                 return Api.deleteQuestion(id)
             },
             success: QuestionActions.deleteQuestion

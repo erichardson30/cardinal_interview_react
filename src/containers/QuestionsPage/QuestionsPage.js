@@ -78,7 +78,7 @@ class QuestionsPage extends Component {
         const q = this.state.question;
         q.createdAt = date.toString();
         this.setState({ question : q });
-        QuestionStore.createQuestion(this.state.question);
+        QuestionActions.createQuestion(this.state.question);
     }
 
     textChange = (val) => {
@@ -117,8 +117,7 @@ class QuestionsPage extends Component {
     }
 
     deleteItem = (id) => {
-        console.log(id);
-        QuestionStore.deleteQuestion(id);
+        QuestionActions.deleteQuestion(id);
     }
 
     renderData() {
