@@ -8,17 +8,11 @@
  */
 
 import alt from '../core/alt';
-import axios from 'axios';
 import Api from '../services/QuestionApi';
 
 class QuestionActions {
     constructor() {
         // put auto generate actions here
-        // this.generateActions(
-        //     'getQuestions',
-        //     'createQuestion',
-        //     'deleteQuestion'
-        // );
     }
 
     getQuestions() {

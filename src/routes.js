@@ -17,8 +17,7 @@ import LoginPage from './containers/LoginPage';
 import QuestionsPage from './containers/QuestionsPage';
 import RegisterPage from './containers/RegisterPage';
 import NotFoundPage from './containers/NotFoundPage';
-import InterviewStore from './stores/InterviewStore';
-import QuestionStore from './stores/QuestionStore';
+import InterviewActions from './actions/InterviewActions';
 import QuestionActions from './actions/QuestionActions';
 
 async function getContextComponent(location, callback) {
@@ -29,7 +28,7 @@ async function getContextComponent(location, callback) {
 }
 
 const getInterviews = async (location, callback) => {
-  await InterviewStore.fetchData();
+  await InterviewActions.getInterviews();
   callback(null, () => <InterviewPage />)
 }
 

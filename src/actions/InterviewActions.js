@@ -8,14 +8,22 @@
  */
 
 import alt from '../core/alt';
-import axios from 'axios';
+import Api from '../services/InterviewApi';
 
 class InterviewActions {
     constructor() {
         // put auto generate actions here
-        this.generateActions(
-            'getInterviews'
-        );
+    }
+
+    getInterviews() {
+        Api.getInterviews().then((result) => {
+            this.getInterviewsSuccess(result);
+        });
+        return true;
+    }
+
+    getInterviewsSuccess(data) {
+        return data;
     }
 }
 export default (alt.createActions(InterviewActions));

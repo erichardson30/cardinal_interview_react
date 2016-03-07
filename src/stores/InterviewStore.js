@@ -20,7 +20,7 @@ class InterviewStore {
         this.error = null
     }
 
-    onGetInterviews(data) {
+    onGetInterviewsSuccess(data) {
         if (data === false) {
             this.onFailed()
         } else {
