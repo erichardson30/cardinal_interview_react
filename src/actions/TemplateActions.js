@@ -8,22 +8,22 @@
  */
 
 import alt from '../core/alt';
-import Api from '../services/InterviewApi';
+import Api from '../services/TemplateApi';
 
-class InterviewActions {
+class TemplateActions {
     constructor() {
         // put auto generate actions here
     }
 
-    getInterviews() {
-        Api.getInterviews().then((result) => {
-            this.getInterviewsSuccess(result);
+    getTemplates() {
+        Api.getTemplates().then((result) => {
+            this.getTemplatesSuccess(result);
         });
         return true;
     }
 
-    getInterviewsSuccess(data) {
+    getTemplatesSuccess(data) {
         return data;
     }
 }
-export default (alt.createActions(InterviewActions));
+export default (alt.createActions(TemplateActions));

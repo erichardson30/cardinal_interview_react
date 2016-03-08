@@ -9,20 +9,20 @@
 
 import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './InterviewPage.scss';
-import InterviewItem from '../../components/InterviewPage/InterviewItem';
-import InterviewStore from '../../stores/InterviewStore';
-import InterviewActions from '../../actions/InterviewActions';
+import s from './TemplatePage.scss';
+import TemplateItem from '../../components/TemplatePage/TemplateItem';
+import TemplateStore from '../../stores/TemplateStore';
+import Templatections from '../../actions/TemplateActions';
 import Loader from 'react-loader';
 
-const title = 'Inverviews';
+const title = 'Templates';
 
 
-class InterviewPage extends Component {
+class TemplatePage extends Component {
 
     constructor(props) {
         super(props);
-        this.state = InterviewStore.getState();
+        this.state = TemplateStore.getState();
         // AppActions.getData();
         this.onChange = this.onChange.bind(this);
     }
@@ -33,11 +33,11 @@ class InterviewPage extends Component {
 
   componentWillMount() {
     this.context.onSetTitle(title);
-    InterviewStore.listen(this.onChange);
+    TemplateStore.listen(this.onChange);
 }
 
 componentWillUnmount() {
-    InterviewStore.unlisten(this.onChange);
+    TemplateStore.unlisten(this.onChange);
 }
 
 onChange(state) {
@@ -47,7 +47,7 @@ onChange(state) {
 renderData() {
     return this.state.data.map((data) => {
         return (
-            <InterviewItem key={data._id} data={data} />
+            <TemplateItem key={data._id} data={data} />
         )
     })
 }
@@ -68,4 +68,4 @@ renderData() {
 
 }
 
-export default withStyles(InterviewPage, s);
+export default withStyles(TemplatePage, s);

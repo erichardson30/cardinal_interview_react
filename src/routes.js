@@ -12,12 +12,12 @@ import { IndexRoute, Route } from 'react-router';
 import fetch from './core/fetch';
 import App from './containers/App';
 import ContentPage from './containers/ContentPage';
-import InterviewPage from './containers/InterviewPage';
+import TemplatePage from './containers/TemplatePage';
 import LoginPage from './containers/LoginPage';
-import QuestionsPage from './containers/QuestionsPage';
+import QuestionPage from './containers/QuestionPage';
 import RegisterPage from './containers/RegisterPage';
 import NotFoundPage from './containers/NotFoundPage';
-import InterviewActions from './actions/InterviewActions';
+import TemplateActions from './actions/TemplateActions';
 import QuestionActions from './actions/QuestionActions';
 
 async function getContextComponent(location, callback) {
@@ -27,14 +27,14 @@ async function getContextComponent(location, callback) {
   callback(null, () => <ContentPage {...content} />);
 }
 
-const getInterviews = async (location, callback) => {
-  await InterviewActions.getInterviews();
-  callback(null, () => <InterviewPage />)
+const getTemplates = async (location, callback) => {
+  await TemplateActions.getTemplates();
+  callback(null, () => <TemplatePage />)
 }
 
 const getQuestions = async (location, callback) => {
   await QuestionActions.getQuestions();
-  callback(null, () => <QuestionsPage />)
+  callback(null, () => <QuestionPage />)
 }
 
 export default (
@@ -42,7 +42,7 @@ export default (
     <Route path="/" component={App}>
       <IndexRoute getComponent={getContextComponent} />
       <Route path="login" component={LoginPage} />
-      <Route path="interviews" getComponent={getInterviews} />
+      <Route path="templates" getComponent={getTemplates} />
       <Route path="questions" getComponent={getQuestions} />
     </Route>
     <Route path="*" component={NotFoundPage} />

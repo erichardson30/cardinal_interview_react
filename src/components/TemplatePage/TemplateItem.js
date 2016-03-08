@@ -16,7 +16,7 @@ import CardTitle from 'material-ui/lib/card/card-title';
 import FlatButton from 'material-ui/lib/flat-button';
 import CardText from 'material-ui/lib/card/card-text';
 
-class InterviewItem extends Component {
+class TemplateItem extends Component {
 
     render() {
         return (
@@ -30,4 +30,4 @@ class InterviewItem extends Component {
     }
 }
 
-export default InterviewItem;
+export default TemplateItem;

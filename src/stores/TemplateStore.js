@@ -8,17 +8,17 @@
  */
 
 import alt from '../core/alt';
-import InterviewActions from '../actions/InterviewActions';
+import TemplateActions from '../actions/TemplateActions';
 
-class InterviewStore {
+class TemplateStore {
     constructor() {
-        this.bindActions(InterviewActions);
+        this.bindActions(TemplateActions);
         this.loaded = false;
         this.data = [];
         this.error = null
     }
 
-    onGetInterviewsSuccess(data) {
+    onGetTemplatesSuccess(data) {
         if (data === false) {
             this.onFailed()
         } else {
@@ -33,4 +33,4 @@ class InterviewStore {
     }
 }
 
-export default alt.createStore(InterviewStore, 'InterviewStore');
+export default alt.createStore(TemplateStore, 'TemplateStore');

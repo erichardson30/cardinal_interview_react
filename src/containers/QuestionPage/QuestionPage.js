@@ -9,19 +9,19 @@
 
 import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './QuestionsPage.scss';
+import s from './QuestionPage.scss';
 import QuestionStore from '../../stores/QuestionStore';
 import QuestionActions from '../../actions/QuestionActions';
 import Loader from 'react-loader';
-import QuestionItem from '../../components/QuestionsPage/QuestionItem';
+import QuestionItem from '../../components/QuestionPage/QuestionItem';
 import FloatButton from '../../components/UI/FloatButton';
-import AddQuestionModal from '../../components/QuestionsPage/AddQuestionModal';
+import AddQuestionModal from '../../components/QuestionPage/AddQuestionModal';
 import Snackbar from 'material-ui/lib/snackbar';
 
 const title = 'Questions';
 
 
-class QuestionsPage extends Component {
+class QuestionPage extends Component {
 
     constructor(props) {
         super(props);
@@ -181,4 +181,4 @@ class QuestionsPage extends Component {
 
 }
 
-export default withStyles(QuestionsPage, s);
+export default withStyles(QuestionPage, s);
