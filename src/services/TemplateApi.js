@@ -3,11 +3,11 @@ import { interviewAppURL } from '../config';
 
 export default {
 
-    async getInterviews() {
+    async getTemplates() {
       let result = [];
 
       try {
-          const response = await axios.get(interviewAppURL + '/interviews');
+          const response = await axios.get(interviewAppURL + '/templates');
           if (response.status !== 200) {
               result = false;
 
