@@ -15,6 +15,8 @@ class QuestionStore {
         this.bindActions(QuestionActions);
         this.loaded = false;
         this.modalIsOpen = false;
+        this.questionAddedSnackbarOpen = false;
+        this.questionDeletedSnackbarOpen = false;
         this.data = [];
         this.question = {
             "id": '',
@@ -25,8 +27,6 @@ class QuestionStore {
             "createdAt": ''
         };
         this.error = null;
-        this.questionAdded = null;
-        this.questionDeleted = null;
     }
 
     onGetQuestionsSuccess(data) {
@@ -42,8 +42,7 @@ class QuestionStore {
         if (data === false) {
             this.onFailed();
         } else {
-            this.questionAdded = true;
-            //get all questions
+            this.questionAddedSnackbarOpen = true;
         }
     }
 
@@ -51,8 +50,7 @@ class QuestionStore {
         if (data === false) {
             this.onFailed();
         } else {
-            this.questionDeleted = true;
-            //get all questions
+            this.questionDeletedSnackbarOpen = true;
         }
     }
 

@@ -40,6 +40,7 @@ class AddQuestionModal extends Component {
     }
 
     render() {
+        let multiLine = true;
         return (
             <Modal
                 isOpen={this.props.open}
@@ -48,14 +49,14 @@ class AddQuestionModal extends Component {
                 <TextInput
                     hintText="Question"
                     change={this.changeText}
-                    multiLine = 'true'
+                    multiLine = {true}
                 >
                     {this.props.question.text}
                 </TextInput>
                 <TextInput
                     hintText="Answer"
                     change={this.changeAnswer}
-                    multiLine='true'
+                    multiLine= {true}
                 >
                     {this.props.question.answer}
                 </TextInput>

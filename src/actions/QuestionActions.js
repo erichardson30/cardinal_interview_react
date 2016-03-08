@@ -34,6 +34,7 @@ class QuestionActions {
     }
 
     createQuestionSuccess(data) {
+        this.getQuestions();
         return data;
     }
 
@@ -45,6 +46,7 @@ class QuestionActions {
     }
 
     deleteQuestionSuccess(data) {
+        this.getQuestions();
         return data;
     }
 }

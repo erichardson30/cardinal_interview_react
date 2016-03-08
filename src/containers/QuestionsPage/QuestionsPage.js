@@ -16,6 +16,7 @@ import Loader from 'react-loader';
 import QuestionItem from '../../components/QuestionsPage/QuestionItem';
 import FloatButton from '../../components/UI/FloatButton';
 import AddQuestionModal from '../../components/QuestionsPage/AddQuestionModal';
+import Snackbar from 'material-ui/lib/snackbar';
 
 const title = 'Questions';
 
@@ -50,6 +51,10 @@ class QuestionsPage extends Component {
     shouldComponentUpdate(nextProps, nextState) {
         if (nextState.data !== this.state.data ||
             nextState.modalIsOpen !== this.state.modalIsOpen ||
+            nextState.handleQuestionAddedSnackbarClose !==
+            this.state.handleQuestionAddedSnackbarClose ||
+            nextState.handleQuestionDeletedSnackbarClose !==
+            this.state.handleQuestionDeletedSnackbarClose ||
             nextState.question !== this.state.question) {
                 return true;
             } else {
@@ -73,12 +78,21 @@ class QuestionsPage extends Component {
         this.setState({ modalIsOpen: false});
     }
 
+    handleQuestionAddedSnackbarClose = () => {
+        this.setState({ questionAddedSnackbarOpen : false });
+    }
+
+    handleQuestionDeletedSnackbarClose = () => {
+        this.setState({ questionDeletedSnackbarOpen : false });
+    }
+
     createQuestion = () => {
         const date = new Date();
         const q = this.state.question;
         q.createdAt = date.toString();
         this.setState({ question : q });
         QuestionActions.createQuestion(this.state.question);
+        QuestionActions.getQuestions();
     }
 
     textChange = (val) => {
@@ -136,6 +150,18 @@ class QuestionsPage extends Component {
                     <div>
                         <Loader loaded={this.state.loaded} />
                         <FloatButton openModal={this.newQuestion}/>
+                        <Snackbar
+                            open={this.state.questionAddedSnackbarOpen}
+                            message="Question successfully added"
+                            autoHideDuration={2000}
+                            onRequestClose={this.handleQuestionAddedSnackbarClose}
+                        />
+                        <Snackbar
+                            open={this.state.questionDeletedSnackbarOpen}
+                            message="Question successfully deleted"
+                            autoHideDuration={2000}
+                            onRequestClose={this.handleQuestionDeletedSnackbarClose}
+                        />
                         <AddQuestionModal
                             open = {this.state.modalIsOpen}
                             close = {this.closeModal}

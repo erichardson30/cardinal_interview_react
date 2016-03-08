@@ -9,12 +9,10 @@
 
 import alt from '../core/alt';
 import InterviewActions from '../actions/InterviewActions';
-import InterviewSource from '../sources/InterviewSource';
 
 class InterviewStore {
     constructor() {
         this.bindActions(InterviewActions);
-        this.exportAsync(InterviewSource);
         this.loaded = false;
         this.data = [];
         this.error = null
