@@ -23,6 +23,7 @@
     "react": "0.14.7",
     "react-dom": "0.14.7",
     "react-router": "2.0.0-rc5",
+    "react-tagged-input": "0.0.18",
     "source-map-support": "0.4.0",
     "whatwg-fetch": "0.11.0"
   },
@@ -85,8 +86,8 @@
   },
   "scripts": {
     "lint": "eslint src tools && jscs src tools",
-    "csslint": "csscomb src/containers --lint --verbose",
-    "csscomb": "csscomb src/containers --verbose",
+    "csslint": "csscomb src/components --lint --verbose",
+    "csscomb": "csscomb src/components --verbose",
     "test": "eslint src && jest",
     "clean": "babel-node tools/run clean",
     "copy": "babel-node tools/run copy",

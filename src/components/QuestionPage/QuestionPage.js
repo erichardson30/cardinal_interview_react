@@ -13,9 +13,9 @@ import s from './QuestionPage.scss';
 import QuestionStore from '../../stores/QuestionStore';
 import QuestionActions from '../../actions/QuestionActions';
 import Loader from 'react-loader';
-import QuestionItem from '../../components/QuestionPage/QuestionItem';
+import QuestionItem from './QuestionItem';
 import FloatButton from '../../components/UI/FloatButton';
-import AddQuestionModal from '../../components/QuestionPage/AddQuestionModal';
+import AddQuestionModal from './AddQuestionModal';
 import Snackbar from 'material-ui/lib/snackbar';
 
 const title = 'Questions';

@@ -23,17 +23,9 @@ import Button from '../UI/Button';
 class QuestionItem extends Component {
 
     renderTags() {
-        return this.props.data.tag.map((tag, index) => {
+        return this.props.data.tags.map((tag, index) => {
             return (
                 <FlatButton key={index} label={tag} />
-            )
-        })
-    }
-
-    renderCompany() {
-        return this.props.data.company.map((company, index) => {
-            return (
-                <FlatButton key={index} label={company} />
             )
         })
     }
@@ -55,7 +47,6 @@ class QuestionItem extends Component {
                 </CardText>
                 <CardActions>
                     { this.renderTags() }
-                    { this.renderCompany() }
 
                     <IconButton onClick={this.delete} style={{float: 'right'}}>
                         <Delete />

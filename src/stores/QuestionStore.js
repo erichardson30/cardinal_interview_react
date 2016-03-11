@@ -21,9 +21,10 @@ class QuestionStore {
         this.question = {
             "id": '',
             "text": '',
-            "tag": [],
-            "answer": [],
-            "company": [],
+            "tags": [],
+            "answers": [],
+            "level": '',
+            "tech": '',
             "createdAt": ''
         };
         this.error = null;

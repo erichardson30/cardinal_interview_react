@@ -17,7 +17,7 @@ import { match, RouterContext } from 'react-router';
 import routes from './routes';
 import ContextHolder from './core/ContextHolder';
 
-import Html from './containers/Html';
+import Html from './components/Html';
 import assets from './assets';
 import { port } from './config';
 

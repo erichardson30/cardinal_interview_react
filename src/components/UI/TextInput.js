@@ -13,7 +13,8 @@ class TextInput extends Component {
                 hintText={this.props.hintText}
                 floatingLabelText={this.props.hintText}
                 onChange={this.onChange}
-                multiLine={this.props.multiLine} />
+                multiLine={this.props.multiLine}
+                defaultValue = {this.props.default} />
                 <br/>
             </div>
         )

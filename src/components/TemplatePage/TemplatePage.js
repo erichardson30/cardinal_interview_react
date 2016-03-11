@@ -10,7 +10,7 @@
 import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './TemplatePage.scss';
-import TemplateItem from '../../components/TemplatePage/TemplateItem';
+import TemplateItem from './TemplateItem';
 import TemplateStore from '../../stores/TemplateStore';
 import Templatections from '../../actions/TemplateActions';
 import Loader from 'react-loader';
@@ -23,7 +23,6 @@ class TemplatePage extends Component {
     constructor(props) {
         super(props);
         this.state = TemplateStore.getState();
-        // AppActions.getData();
         this.onChange = this.onChange.bind(this);
     }
 

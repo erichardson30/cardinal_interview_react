@@ -10,13 +10,13 @@
 import React from 'react';
 import { IndexRoute, Route } from 'react-router';
 import fetch from './core/fetch';
-import App from './containers/App';
-import ContentPage from './containers/ContentPage';
-import TemplatePage from './containers/TemplatePage';
-import LoginPage from './containers/LoginPage';
-import QuestionPage from './containers/QuestionPage';
-import RegisterPage from './containers/RegisterPage';
-import NotFoundPage from './containers/NotFoundPage';
+import App from './components/App';
+import ContentPage from './components/ContentPage';
+import TemplatePage from './components/TemplatePage';
+import LoginPage from './components/LoginPage';
+import QuestionPage from './components/QuestionPage';
+import RegisterPage from './components/RegisterPage';
+import NotFoundPage from './components/NotFoundPage';
 import TemplateActions from './actions/TemplateActions';
 import QuestionActions from './actions/QuestionActions';
 

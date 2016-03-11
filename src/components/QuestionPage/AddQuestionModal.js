@@ -13,6 +13,8 @@ import QuestionActions from '../../actions/QuestionActions';
 import Modal from 'react-modal';
 import TextInput from '../UI/TextInput';
 import Button from '../UI/Button';
+import TagInput from '../UI/TagInput';
+
 
 class AddQuestionModal extends Component {
     createQuestion = () => {
@@ -35,9 +37,6 @@ class AddQuestionModal extends Component {
         this.props.changeTag(val);
     }
 
-    changeCompany = (val) => {
-        this.props.changeCompany(val);
-    }
 
     render() {
         let multiLine = true;
@@ -50,28 +49,11 @@ class AddQuestionModal extends Component {
                     hintText="Question"
                     change={this.changeText}
                     multiLine = {true}
-                >
-                    {this.props.question.text}
-                </TextInput>
-                <TextInput
-                    hintText="Answer"
-                    change={this.changeAnswer}
-                    multiLine= {true}
-                >
-                    {this.props.question.answer}
-                </TextInput>
-                <TextInput
-                    hintText="Tag"
-                    change={this.changeTag}
-                >
-                    {this.props.question.tag}
-                </TextInput>
-                <TextInput
-                    hintText="Company"
-                    change={this.changeCompany}
-                >
-                    {this.props.question.company}
-                </TextInput>
+                    default = {this.props.question.text}
+                ></TextInput>
+
+                <TagInput
+                    tags={this.props.question.tags} />
 
                 <Button label="Create Question" onSubmit={this.createQuestion} disabled={false}/>
                 <Button label="Cancel" onSubmit={this.closeModal} disabled={false}/>
