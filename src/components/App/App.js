@@ -8,10 +8,12 @@
  */
 
 import React, { Component, PropTypes } from 'react';
+var injectTapEventPlugin = require("react-tap-event-plugin");
 import s from './App.scss';
 import Header from '../Header';
 import Footer from '../Footer';
 
+injectTapEventPlugin();
 class App extends Component {
 
   static propTypes = {

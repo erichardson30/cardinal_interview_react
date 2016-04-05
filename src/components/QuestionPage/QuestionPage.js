@@ -13,9 +13,9 @@ import s from './QuestionPage.scss';
 import QuestionStore from '../../stores/QuestionStore';
 import QuestionActions from '../../actions/QuestionActions';
 import Loader from 'react-loader';
-import QuestionItem from './QuestionItem';
+import QuestionItem from '../../components/QuestionPage/QuestionItem';
 import FloatButton from '../../components/UI/FloatButton';
-import AddQuestionModal from './AddQuestionModal';
+import AddQuestionModal from '../../components/QuestionPage/AddQuestionModal';
 import Snackbar from 'material-ui/lib/snackbar';
 
 const title = 'Questions';
@@ -28,7 +28,7 @@ class QuestionPage extends Component {
         this.state = QuestionStore.getState();
         this.onChange = this.onChange.bind(this);
         this.newQuestion = this.newQuestion.bind(this);
-        this.closeMOdal = this.closeModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
     }
 
     static contextTypes = {
@@ -48,19 +48,20 @@ class QuestionPage extends Component {
         this.setState(state);
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        if (nextState.data !== this.state.data ||
-            nextState.modalIsOpen !== this.state.modalIsOpen ||
-            nextState.handleQuestionAddedSnackbarClose !==
-            this.state.handleQuestionAddedSnackbarClose ||
-            nextState.handleQuestionDeletedSnackbarClose !==
-            this.state.handleQuestionDeletedSnackbarClose ||
-            nextState.question !== this.state.question) {
-                return true;
-            } else {
-                return false;
-            }
-    }
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     if (nextState.data !== this.state.data ||
+    //         nextState.modalIsOpen !== this.state.modalIsOpen ||
+    //         nextState.handleQuestionAddedSnackbarClose !==
+    //         this.state.handleQuestionAddedSnackbarClose ||
+    //         nextState.handleQuestionDeletedSnackbarClose !==
+    //         this.state.handleQuestionDeletedSnackbarClose ||
+    //         nextState.question !== this.state.question) {
+    //             return true;
+    //         } else {
+    //             return false;
+    //         }
+    // }
+
 
     newQuestion = () => {
         this.setState({ modalIsOpen: true});
@@ -69,7 +70,7 @@ class QuestionPage extends Component {
             "tags": [],
             "level": '',
             "tech": '',
-            "answer": [],
+            "answers": [],
             "createdAt": ''
         };
         this.setState({ question: q })
@@ -97,25 +98,37 @@ class QuestionPage extends Component {
     }
 
     textChange = (val) => {
-        const q = this.state.question;
+        let q = this.state.question;
         q.text = val;
         this.setState({ question : q });
     }
 
     answerChange = (val) => {
-        let array = [];
-        const q = this.state.question;
-        array.push(val);
-        q.answer = array;
+        let q = this.state.question;
+        q.answers.push(val);
         this.setState({ question : q });
     }
 
-    tagChange = (val) => {
-        let array = [];
-        const q = this.state.question;
-        array.push(val);
-        q.tag = array;
+    techSelectChange = (val) => {
+        let q = this.state.question;
+        q.tech = val;
         this.setState({ question : q });
+    }
+
+    levelSelectChange = (val) => {
+        let q = this.state.question;
+        q.level = val;
+        this.setState({ question : q });
+    }
+
+    updateTags = (tag) => {
+        let q = this.state.question;
+        q.tags.push(
+            {
+                tag : tag
+            }
+        );
+        this.setState({question: q});
     }
 
     editItem = (question) => {
@@ -126,6 +139,7 @@ class QuestionPage extends Component {
     deleteItem = (id) => {
         QuestionActions.deleteQuestion(id);
     }
+
 
     renderData() {
         return this.state.data.map((data, index) => {
@@ -162,10 +176,12 @@ class QuestionPage extends Component {
                             createQuestion = {this.createQuestion}
                             changeText = {this.textChange}
                             changeAnswer = {this.answerChange}
-                            changeTag = {this.tagChange}
-                            />
-                        { this.renderData() }
+                            techSelectChange = {this.techSelectChange}
+                            levelSelectChange = {this.levelSelectChange}
+                            updateTags = {this.updateTags}
+                        />
                     </div>
+                    { this.renderData() }
                 </div>
             </div>
         );

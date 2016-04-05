@@ -19,13 +19,16 @@ class QuestionStore {
         this.questionDeletedSnackbarOpen = false;
         this.data = [];
         this.question = {
-            "id": '',
-            "text": '',
-            "tags": [],
-            "answers": [],
-            "level": '',
-            "tech": '',
-            "createdAt": ''
+            id: '',
+            text: '',
+            tags: [],
+            answers: [{
+                text: '',
+                preferred : true
+            }],
+            level: '',
+            tech: '',
+            createdAt: ''
         };
         this.error = null;
     }

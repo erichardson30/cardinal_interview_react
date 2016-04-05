@@ -72,7 +72,15 @@ const config = {
           path.resolve(__dirname, '../src'),
         ],
         loader: 'babel-loader',
-      }, {
+    }, {
+        test: /\.css$/,
+        loaders: [
+          'isomorphic-style-loader',
+          `css-loader?${DEBUG ? 'sourceMap&' : 'minimize&'}modules&localIdentName=` +
+          `${DEBUG ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]'}`,
+        ],
+      },
+    {
         test: /\.scss$/,
         loaders: [
           'isomorphic-style-loader',

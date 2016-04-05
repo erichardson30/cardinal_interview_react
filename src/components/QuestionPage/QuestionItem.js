@@ -30,6 +30,14 @@ class QuestionItem extends Component {
         })
     }
 
+    renderAnswers() {
+        return this.props.data.answers.map((answer, index) => {
+            return (
+                <p key={index}>{answer}</p>
+            )
+        })
+    }
+
     edit = () => {
         this.props.edit(this.props.data);
     }
@@ -43,11 +51,10 @@ class QuestionItem extends Component {
             <Card style={{margin: 50}}>
                 <CardTitle title={this.props.data.text} />
                 <CardText>
-                    {this.props.data.answer}
+                    { this.renderAnswers() }
                 </CardText>
                 <CardActions>
                     { this.renderTags() }
-
                     <IconButton onClick={this.delete} style={{float: 'right'}}>
                         <Delete />
                     </IconButton>
@@ -58,6 +65,12 @@ class QuestionItem extends Component {
             </Card>
         )
     }
+}
+
+QuestionItem.propTypes = {
+    data: PropTypes.object.isRequired,
+    delete: PropTypes.func.isRequired,
+    edit: PropTypes.func.isRequired
 }
 
 export default QuestionItem;

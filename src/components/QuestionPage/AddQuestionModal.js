@@ -8,15 +8,21 @@
  */
 
 import React, { Component, PropTypes } from 'react';
-import QuestionStore from '../../stores/QuestionStore';
-import QuestionActions from '../../actions/QuestionActions';
 import Modal from 'react-modal';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import s from './Modal.scss';
+import SelectField from 'material-ui/lib/select-field';
+import MenuItem from 'material-ui/lib/menus/menu-item';
+import Checkbox from 'material-ui/lib/checkbox';
+import ActionFavorite from 'material-ui/lib/svg-icons/action/favorite';
+import ActionFavoriteBorder from 'material-ui/lib/svg-icons/action/favorite-border';
 import TextInput from '../UI/TextInput';
 import Button from '../UI/Button';
-import TagInput from '../UI/TagInput';
+import Select from 'react-select';
+import {Col} from 'react-bootstrap';
 
-
-class AddQuestionModal extends Component {
+class AddQuestionModal extends Component {    
+   
     createQuestion = () => {
         this.props.createQuestion();
     }
@@ -33,33 +39,97 @@ class AddQuestionModal extends Component {
         this.props.changeAnswer(val);
     }
 
-    changeTag = (val) => {
-        this.props.changeTag(val);
+    techSelectChange = (event, index, value) => {
+        this.props.techSelectChange(value);
     }
 
+    updateTags = (val) => {
+        this.props.updateTags(val);
+    }
+
+
+    levelSelectChange = (event, index, value) => {
+        this.props.levelSelectChange(value);
+    }
 
     render() {
         let multiLine = true;
         return (
             <Modal
                 isOpen={this.props.open}
-                onRequestClose={this.closeModal} >
+                onRequestClose={this.closeModal}>
+
                 <h2>New Question</h2>
                 <TextInput
                     hintText="Question"
                     change={this.changeText}
                     multiLine = {true}
                     default = {this.props.question.text}
-                ></TextInput>
+                />
+                <TextInput
+                    hintText="Answer"
+                    change={this.changeAnswer}
+                    multiLine = {true}
+                    default = {this.props.question.answer}
+                />
+                <div>
+                    <SelectField
+                        value={this.props.question.tech}
+                        onChange={this.techSelectChange}
+                        floatingLabelText="Technology">
+                        <MenuItem value={"JavaScript"} primaryText="JavaScript"/>
+                        <MenuItem value={"Java"} primaryText="Java"/>
+                        <MenuItem value={"C#"} primaryText="C#"/>
+                        <MenuItem value={".NET"} primaryText=".NET"/>
+                        <MenuItem value={"iOS"} primaryText="iOS"/>
+                    </SelectField>
+                </div>
+                <div>
+                    <SelectField
+                        value={this.props.question.level}
+                        onChange={this.levelSelectChange}
+                        floatingLabelText="Difficulty">
+                        <MenuItem value={"Beginner"} primaryText="Beginner"/>
+                        <MenuItem value={"Intermediate"} primaryText="Intermediate"/>
+                        <MenuItem value={"Advanced"} primaryText="Advanced"/>
+                        <MenuItem value={"Expert"} primaryText="Expert"/>
+                    </SelectField>
+                </div>
+                <div>
+                    <Select
+                        name="tags"
+                        options={this.props.question.tags}
+                        onChange={this.updateTags}
+                        multi={true}
+                        allowCreate={true}
+                    />
+                </div>
 
-                <TagInput
-                    tags={this.props.question.tags} />
-
-                <Button label="Create Question" onSubmit={this.createQuestion} disabled={false}/>
-                <Button label="Cancel" onSubmit={this.closeModal} disabled={false}/>
+                <div className='buttonDiv'>
+                    <Button label='Cancel'
+                        disabled={false}
+                        onSubmit={this.closeModal}
+                    />
+                    <Button label='Create Question'
+                        disabled={false}
+                        onSubmit={this.createQuestion}
+                    />
+                </div>
             </Modal>
         );
     }
 }
 
-export default AddQuestionModal;
+AddQuestionModal.propTypes = {
+    open : PropTypes.bool.isRequired,
+    close : PropTypes.func.isRequired,
+    question : PropTypes.object.isRequired,
+    createQuestion : PropTypes.func.isRequired,
+    changeText : PropTypes.func.isRequired,
+    changeAnswer : PropTypes.func.isRequired,
+    techSelectChange : PropTypes.func.isRequired,
+    levelSelectChange : PropTypes.func.isRequired,
+    updateTags : PropTypes.func.isRequired
+};
+
+export default withStyles(AddQuestionModal, s);
